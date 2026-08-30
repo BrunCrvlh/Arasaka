@@ -1,8 +1,15 @@
-def criar_conta(nome, cpf, senha):
-  guarda_nome = nome
-  guarda_cpf = cpf
-  guarda_senha = senha
-  if nome == guarda_nome:
-    return "
-  
-  
+def criacao_de_conta(cliente):
+    numero_da_conta = 260078955
+    nome = cliente
+    saldo = float(0)
+    conta = (numero_da_conta, nome, saldo)
+    
+    return conta
+
+cliente = "Rikelme"
+conta = criacao_de_conta(cliente)
+
+print("         Sua conta foi criada com sucesso!          ")
+print("Número da conta: ", conta[0])
+print("Cliente: ", conta[1])
+print("Saldo: ", conta[2])
