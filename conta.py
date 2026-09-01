@@ -6,7 +6,7 @@ def criacao_de_conta(cliente):
     
     return conta
 
-cliente = "Rikelme"
+cliente = "XXXXX"
 conta = criacao_de_conta(cliente)
 
 print("         Sua conta foi criada com sucesso!          ")
