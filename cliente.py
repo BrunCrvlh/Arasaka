@@ -1,2 +1,4 @@
 def criar_cliente(nome, cpf):
-  return nome, cpf
+  guarda_cpf = cpf
+  nome = cliente
+  return cliente
