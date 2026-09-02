@@ -5,7 +5,7 @@ from conta import criacao_de_conta, consultar_saldo, depositar, sacar
 cliente, cpf = criar_cliente('Bruno', '12345678900')
 
 # conta
-numero_da_conta, cpf, usuario, saldo_atual = criacao_de_conta(cliente)
+numero_da_conta, cpf, usuario, saldo_atual = criacao_de_conta(cliente, cpf)
 print("     Sua conta foi criada com sucesso!    ")
 print("Número da conta:", numero_da_conta)
 print("Usuário:", cliente)
