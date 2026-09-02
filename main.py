@@ -2,10 +2,10 @@ from cliente import criar_cliente
 from conta import criacao_de_conta, consultar_saldo, depositar, sacar
 
 # cliente
-nome, cpf = criar_cliente('Bruno', '12345678900')
+cliente = criar_cliente('Bruno', '12345678900')
 
 # conta
-numero, cliente, saldo = criacao_de_conta(nome)
+numero, cliente, saldo = criacao_de_conta(cliente)
 
 # consultar saldo
 saldo = consultar_saldo(saldo)
