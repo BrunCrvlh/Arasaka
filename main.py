@@ -5,19 +5,28 @@ from conta import criacao_de_conta, consultar_saldo, depositar, sacar
 cliente = criar_cliente('Bruno', '12345678900')
 
 # conta
-numero, cliente, saldo = criacao_de_conta(cliente)
+numero_da_conta, cliente, saldo_atual = criacao_de_conta(cliente)
+print("     Sua conta foi criada com sucesso!    ")
+print("Número da conta:", numero_da_conta)
+print("Usuário:", cliente)
+print("Saldo:", saldo_atual)
 
 # consultar saldo
-saldo = consultar_saldo(saldo)
+saldo_atual = consultar_saldo(saldo)
+print("Seu saldo:", saldo_atual)
 
 # depósito
-saldo = depositar(500)
+saldo_atual = depositar(saldo_atual, 500)
+print("Depósito realizado com sucesso!")
 
 # consultando saldo após depósito 
-saldo = consultar_saldo(saldo)
+saldo_atual = consultar_saldo(saldo_atual)
+print("Seu saldo:", saldo_atual)
 
 # saque
-saldo = sacar(saldo, 200)
+saldo_atual = sacar(saldo_atual, 200)
+print("Saque realizado com sucesso!")
 
 # consultando saldo após saque 
-saldo = consultar_saldo(saldo)
+saldo_atual = consultar_saldo(saldo)
+print("Seu saldo:", saldo_atual)
