@@ -5,7 +5,7 @@ from conta import criacao_de_conta, consultar_saldo, depositar, sacar
 nome, cpf = criar_cliente('Bruno', '12345678900')
 
 # conta
-numero, cliente, saldo = criacao_de_conta(
+numero, cliente, saldo = criacao_de_conta(nome)
 
 # consultar saldo
 saldo = consultar_saldo(saldo)
