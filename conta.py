@@ -1,5 +1,5 @@
-def criacao_de_conta(cliente, mes_de_nascimento):
-    numero_da_conta = "2602" + (str(mes_de_nascimento)) + "9 - 55"
+def criacao_de_conta(cliente):
+    numero_da_conta = "2602079 - 55"
     nome = cliente
     saldo_atual = float(0)
     
