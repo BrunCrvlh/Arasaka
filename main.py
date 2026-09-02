@@ -11,22 +11,22 @@ print("Número da conta:", numero_da_conta)
 print("Usuário:", cliente)
 print("Saldo:", saldo_atual)
 
-# consultar saldo
+# consulta saldo
 saldo_atual = consultar_saldo(saldo_atual)
 print("Seu saldo:", saldo_atual)
 
-# depósito
+# deposita valor
 saldo_atual = depositar(saldo_atual, 500)
 print("Depósito realizado com sucesso!")
 
-# consultando saldo após depósito 
+# consulta saldo após depósito 
 saldo_atual = consultar_saldo(saldo_atual)
 print("Seu saldo:", saldo_atual)
 
-# saque
+# saca valor
 saldo_atual = sacar(saldo_atual, 200)
 print("Saque realizado com sucesso!")
 
-# consultando saldo após saque 
+# consulta saldo após saque 
 saldo_atual = consultar_saldo(saldo_atual)
 print("Seu saldo:", saldo_atual)
