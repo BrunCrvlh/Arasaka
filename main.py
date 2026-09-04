@@ -6,7 +6,7 @@ cliente, cpf = criar_cliente('Bruno', '12345678900')
 print("Cliente cadastrado com sucesso!")
 
 # criação de conta do cliente
-numero_da_conta, cpf, usuario, saldo_atual = criacao_de_conta(cliente, cpf)
+numero_da_conta, cpf, nome, login, senha, saldo_atual = criacao_de_conta(cliente, cpf)
 print("     Sua conta foi criada com sucesso!    ")
 print("Número da conta:", numero_da_conta)
 print("Usuário:", cliente)
