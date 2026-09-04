@@ -17,7 +17,7 @@ def depositar(saldo_atual, valor_de_deposito):
         return saldo_atual
         
 def sacar(saldo_atual, valor_de_saque):
-    if valor_de_saque <= saldo_atual:
+    if valor_de_saque <= saldo_atual and valor_de_saque > 0:
         return saldo_atual - valor_de_saque
     else:
         return saldo_atual
