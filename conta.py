@@ -1,9 +1,11 @@
 def criacao_de_conta(cliente, cpf):
     numero_da_conta = "2602079 - 55"
     usuario = cliente
+    login = "Bruno44"
+    senha = "12345"
     saldo_atual = float(0)
     
-    return numero_da_conta, usuario, cpf, saldo_atual
+    return numero_da_conta, usuario, login, senha, cpf, saldo_atual
 
 def consultar_saldo(saldo_atual):
     return saldo_atual
