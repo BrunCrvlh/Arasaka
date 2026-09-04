@@ -1,6 +1,6 @@
 def criacao_de_conta(cliente, cpf):
     numero_da_conta = "2602079 - 55"
-    usuario = cliente
+    nome = cliente
     login = "Bruno44"
     senha = "12345"
     saldo_atual = float(0)
