@@ -48,4 +48,35 @@ def depositar(numero_conta, valor):
     if indice == -1:
         print("conta nao encontrada")
         return False
-    if valor
+    if valor > 0:
+        conta_atual = contas[indice]
+        conta_atualizada = (conta_atual[0] , conta_atual[1], conta_atual[2], conta_atual[3],  conta_atual[4], conta_atual[5] + valor)
+        contas[indice] = conta_atualizada
+        return True
+    else:
+        print("valor de deposito invalido")
+        return False
+
+def transferir(numero_conta_origem, numero_conta_destino, valor):
+    indice_origem = _indice_da_conta(numero_conta_origem)
+    indice_destino = _indice_da_conta(numero_conta_destino)
+    if indice_origem == -1 or indice_destino == -1:
+        print("conta de origem ou destino nao encontrada")
+        return False
+    conta_origem = contas[indice_origem]
+    conta_destino= contas[indice_destino]
+    saldo_origem = conta_origem[5]
+    if valor > 0 and valor <= saldo_origem:
+        conta_origem_atualizada = (conta_origem[0], conta_origem[1], conta_origem[2], conta_origem[3], conta_origem[4], saldo_origem - valor)
+        conta_destino_atualizada = (conta_destino[0], conta_destino[1], conta_destino[2],conta_destino[3], conta_destino[4], conta_destino[5] + valor)contas[indice_origem] = conta_origem_atualizada
+        contas[indice_destino] = conta_destino_atualizada
+        return True
+    else:
+        print("Saldo insuficiente ou valor inválido!")
+        return False
+
+def montante_total_banco():
+    total = 0
+    for conta in contas:
+        total = total + contas[5]
+    return total
