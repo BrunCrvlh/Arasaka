@@ -19,7 +19,8 @@ def definir_contas(lista):
     global contas
     global proximo_numero_conta
 
-    contas = lista
+    contas.clear()
+    contas.extend(lista)
 
     if len(contas) == 0:
         proximo_numero_conta = 1
