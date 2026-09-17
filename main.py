@@ -24,7 +24,9 @@ from agencia import (
     agencias
 )
 
-from dados_no_json import salvar_dados_gerais_do_banco
+from dados_no_json import (salvar_dados_gerais_do_banco, carrega_dados_gerais_do_banco)
+
+clientes, agencias, contas = carrega_dados_gerais_do_banco
 
 def menu():
 
