@@ -35,8 +35,9 @@ definir_agencias(agencias_salvas)
 definir_contas(contas_salvas)
 
 def menu():
+    opcao = ""
 
-    while True:
+    while opcao !="0": 
 
         print("\n========== MENU DO BANCO ==========")
         print("1 - Salvar dados em formato JSON")
@@ -212,7 +213,6 @@ def menu():
         elif opcao == "0":
 
             print("Sessão encerrada.")
-            break
 
         else:
 
