@@ -13,7 +13,8 @@ def criar_cliente(nome,cpf):
 
 def definir_clientes(lista):
     global clientes
-    clientes = lista
+    clientes.clear()
+    clientes.extend(lista)
 
 #percorre a lista bem na posicao que o cpf ta (posicao 1) e se encontrar, ele devolve a tupla daquele cpf
 def buscar_cliente_por_cpf(cpf): 
