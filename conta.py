@@ -13,6 +13,23 @@ def criacao_de_conta(cpf, codigo_agencia, login, senha):
     proximo_numero_conta = proximo_numero_conta + 1
     return nova_conta
 
+#substitui a lista inteira de contas por outra
+#ajeita o proximo_numero_conta, pra nao repetir o numero de conta depois de carregar os dados  
+def definir_contas(lista):
+    global contas
+    global proximo_numero_conta
+
+    contas = lista
+
+    if len(contas) == 0:
+        proximo_numero_conta = 1
+    else:
+        maior_numero = contas[0][0]
+        for conta in contas:
+            if conta[0] > maior_numero:
+                maior_numero = conta[0]
+        proximo_numero_conta = maior_numero + 1
+        
 #percorre a lista procurando uma conta pelo numero dela
 def buscar_conta_por_numero(numero):
     for conta in contas:
