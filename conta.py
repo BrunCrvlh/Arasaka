@@ -8,13 +8,13 @@ proximo_numero_conta = 1
 def criacao_de_conta(cpf, codigo_agencia, login, senha):
     global proximo_numero_conta
     
-    nova_conta = (proximo_numero_conta, cpf_cliente, codigo_agencia, login, senha, 0.0)
+    nova_conta = (proximo_numero_conta, cpf, codigo_agencia, login, senha, 0.0)
     contas.append(nova_conta)
     proximo_numero_conta = proximo_numero_conta + 1
     return nova_conta
 
 #percorre a lista procurando uma conta pelo numero dela
-def buscar_contar_por_numero(numero):
+def buscar_conta_por_numero(numero):
     for conta in contas:
         if conta[0] == numero:
             return conta
@@ -64,7 +64,7 @@ def depositar(numero_conta, valor):
         return False
 #mesma coisa do debosito so q ao contrario
 def sacar(numero_conta, valor):
-    indice = _indice_da_conta(numero_conta)
+    indice = indice_da_conta(numero_conta)
     if indice == -1:
         print("Conta não encontrada!")
         return False
