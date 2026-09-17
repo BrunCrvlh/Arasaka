@@ -2,6 +2,7 @@ from cliente import (
     criar_cliente,
     buscar_cliente_por_cpf,
     listar_clientes,
+    definir_clientes,
     clientes
 )
 
@@ -13,6 +14,7 @@ from conta import (
     transferir,
     listar_contas,
     montante_total_banco,
+    definir_contas,
     contas
 )
 
@@ -21,12 +23,16 @@ from agencia import (
     listar_agencias,
     buscar_agencia_por_codigo,
     montante_total_agencia,
+    definir_agencias,
     agencias
 )
 
 from dados_no_json import (salvar_dados_gerais_do_banco, carrega_dados_gerais_do_banco)
 
-clientes, agencias, contas = carrega_dados_gerais_do_banco()
+clientes_salvos, agencias_salvas, contas_salvas = carrega_dados_gerais_do_banco()
+definir_clientes(clientes_salvos)
+definir_agencias(agencias_salvas)
+definir_contas(contas_salvas)
 
 def menu():
 
