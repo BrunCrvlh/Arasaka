@@ -43,7 +43,7 @@ def listar_contas():
 #busca a conta e devolve o saldo
 def consultar_saldo(numero_cliente):
      conta = buscar_conta_por_numero(numero_conta)
-    if conta is None::
+    if conta is None:
         print("Conta nao encontrada")
         return None
     return conta[5]
