@@ -17,7 +17,8 @@ def criar_agencia(codigo, nome, cidade):
 #substitui a lista inteira de agências por outra
 def definir_agencias(lista):
     global agencias
-    agencias = lista
+    agencias.clear()
+    agencias.extend(lista)
 
 # Procura uma agência pelo código
 def buscar_agencia_por_codigo(codigo):
