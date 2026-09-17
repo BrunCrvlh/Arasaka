@@ -4,11 +4,11 @@ contas=[]
 proximo_numero_conta = 1
 
 #como o cpf ja identifica o cliente, eu optei por tirar o nome do cliente dessa funcao ok
-#nao tenho muito q falar sobre essa funcao, é a mesma de antes mas alterada, tem o global ali pra poder modificar quem ta fora da funcao, monta a tupla e tem o saldo inicial de 0.0
+#nao tenho muito q falar sobre essa funcao, é a mesma de antes mas alterada, tem o global ali pra poder modificar quem ta fora da funcao, monta a tupla e tem o saldo inicial de 1000.0
 def criacao_de_conta(cpf, codigo_agencia, login, senha):
     global proximo_numero_conta
     
-    nova_conta = (proximo_numero_conta, cpf, codigo_agencia, login, senha, 0.0)
+    nova_conta = (proximo_numero_conta, cpf, codigo_agencia, login, senha, 1000.0)
     contas.append(nova_conta)
     proximo_numero_conta = proximo_numero_conta + 1
     return nova_conta
