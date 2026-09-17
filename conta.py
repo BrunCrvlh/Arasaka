@@ -1,4 +1,10 @@
-def criacao_de_conta(cliente, cpf):
+#cada conta vai ter a tupla (numero, cpf_cliente, codigo_agencia, login, senha, saldo)
+
+contas=[]
+proximo_numero_conta = 1
+
+#como o cpf ja identifica o cliente, eu optei por tirar o nome do cliente dessa funcao ok?
+def criacao_de_conta(cpf:
     numero_da_conta = "2602079 - 55"
     nome = cliente
     login = "Bruno44"
