@@ -24,6 +24,7 @@ from agencia import (
     agencias
 )
 
+from dados_no_json import salvar_dados_gerais_do_banco
 
 def menu():
 
@@ -196,8 +197,8 @@ def menu():
 
         # Salvar JSON
         elif opcao == "1":
-
-            print("Essa opção será ligada à função de salvar JSON.")
+            salvar_dados_gerais_do_banco(clientes, agencias, contas)
+            print("Dados salvos com sucesso!")
 
         # Sair
         elif opcao == "0":
