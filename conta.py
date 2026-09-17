@@ -32,17 +32,17 @@ def listar_contas():
     if len(contas) == 0:
         print("Nenhuma conta cadastrada")
         return
-        print("\n------- CONTAS -------")
-        for conta in contas:
-            numero = conta[0]
-            cpf = conta[1]
-            condigo_agencia= conta[2]
-            saldo = conta[5]
-            print("Conta:", numero, " CPF:", cpf, " Agência:", codigo_agencia, "Saldo: R$", Saldo)
+    print("\n------- CONTAS -------")
+    for conta in contas:
+        numero = conta[0]
+        cpf = conta[1]
+        codigo_agencia= conta[2]
+        saldo = conta[5]
+        print("Conta:", numero, " CPF:", cpf, " Agência:", codigo_agencia, "Saldo: R$", saldo)
 
 #busca a conta e devolve o saldo
-def consultar_saldo(numero_cliente):
-     conta = buscar_conta_por_numero(numero_conta)
+def consultar_saldo(numero_conta):
+    conta = buscar_conta_por_numero(numero_conta)
     if conta is None:
         print("Conta nao encontrada")
         return None
@@ -82,8 +82,8 @@ def sacar(numero_conta, valor):
 
 #acha os indices de origem e destino, confere se a conta de origem tem saldo sulficiente, se tudo tiver certo ela vai criar duas tuplas diferentes pra substituir os saldos, e basicamente um saque de um lado e um deposito do outro
 def transferir(numero_conta_origem, numero_conta_destino, valor):
-    indice_origem = _indice_da_conta(numero_conta_origem)
-    indice_destino = _indice_da_conta(numero_conta_destino)
+    indice_origem = indice_da_conta(numero_conta_origem)
+    indice_destino = indice_da_conta(numero_conta_destino)
     if indice_origem == -1 or indice_destino == -1:
         print("conta de origem ou destino nao encontrada")
         return False
@@ -92,7 +92,8 @@ def transferir(numero_conta_origem, numero_conta_destino, valor):
     saldo_origem = conta_origem[5]
     if valor > 0 and valor <= saldo_origem:
         conta_origem_atualizada = (conta_origem[0], conta_origem[1], conta_origem[2], conta_origem[3], conta_origem[4], saldo_origem - valor)
-        conta_destino_atualizada = (conta_destino[0], conta_destino[1], conta_destino[2],conta_destino[3], conta_destino[4], conta_destino[5] + valor)contas[indice_origem] = conta_origem_atualizada
+        conta_destino_atualizada = (conta_destino[0], conta_destino[1], conta_destino[2], conta_destino[3], conta_destino[4], conta_destino[5] + valor)
+        contas[indice_origem] = conta_origem_atualizada
         contas[indice_destino] = conta_destino_atualizada
         return True
     else:
@@ -103,5 +104,5 @@ def transferir(numero_conta_origem, numero_conta_destino, valor):
 def montante_total_banco():
     total = 0
     for conta in contas:
-        total = total + contas[5]
+        total = total + conta[5]
     return total
