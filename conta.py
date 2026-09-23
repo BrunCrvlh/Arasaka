@@ -8,7 +8,7 @@ proximo_numero_conta = 1
 def criacao_de_conta(cpf, codigo_agencia, login, senha):
     global proximo_numero_conta
     
-    nova_conta = (proximo_numero_conta, cpf, codigo_agencia, login, senha, 1000.0)
+    nova_conta = (proximo_numero_conta, cpf, codigo_agencia, login, senha, 0.0)
     contas.append(nova_conta)
     proximo_numero_conta = proximo_numero_conta + 1
     return nova_conta
