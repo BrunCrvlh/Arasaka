@@ -1,3 +1,11 @@
+from cliente import (criar_cliente, buscar_cliente_por_cpf, listar_clientes, definir_clientes, clientes)
+
+from conta import (criacao_de_conta, consultar_saldo, depositar, sacar, transferir, listar_contas, montante_total_banco, definir_contas, contas)
+
+from agencia import (criar_agencia, listar_agencias, buscar_agencia_por_codigo, montante_total_agencia, definir_agencias, agencias)
+
+from dados_no_json import (salvar_dados_gerais_do_banco, carrega_dados_gerais_do_banco)
+
 def menu():
     opcao = ""
     while opcao != "0": 
