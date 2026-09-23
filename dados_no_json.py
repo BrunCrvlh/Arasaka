@@ -1,7 +1,7 @@
 import json
 
 def salvar_dados_gerais_do_banco(clientes, agencias, contas):
-   with open("dados.json", "w") as arquivo:
+   with open("dados.json", "w", encoding="utf-8") as arquivo indent=1:
         json.dump([clientes, agencias, contas], arquivo)
 
 def carrega_dados_gerais_do_banco():
