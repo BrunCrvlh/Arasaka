@@ -50,7 +50,7 @@ def menu():
 
             if cliente == None:
                 print("Cliente não encontrado!")
-
+                
             agencia = buscar_agencia_por_codigo(codigo_agencia)
 
             elif agencia is None:
@@ -131,14 +131,14 @@ def menu():
 
         # Montante total da agência
         elif opcao == "12":
-            codigo = input("Código da agência: ")
-            agencia = buscar_agencia_por_codigo(codigo)
+             codigo = input("Código da agência: ")
+             agencia = buscar_agencia_por_codigo(codigo)
 
-            if agencia == None:
-                print("Agência não encontrada!")
-            else:
-                total = montante_total_agencia(codigo, contas)
-                print("Montante total da agência: R$",total)
+             if agencia == None:
+                 print("Agência não encontrada!")
+             else:
+                 total = montante_total_agencia(codigo, contas)
+                 print("Montante total da agência: R$",total)
 
         # Montante total do banco
         elif opcao == "13":
@@ -146,3 +146,4 @@ def menu():
             
         else:
             print("Opção inválida!")
+        
