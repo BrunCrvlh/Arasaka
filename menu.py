@@ -4,13 +4,6 @@ from conta import (criacao_de_conta, consultar_saldo, depositar, sacar, transfer
 
 from agencia import (criar_agencia, listar_agencias, buscar_agencia_por_codigo, montante_total_agencia, definir_agencias, agencias)
 
-from dados_no_json import (carrega_dados_gerais_do_banco)
-
-clientes_salvos, agencias_salvas, contas_salvas = carrega_dados_gerais_do_banco()
-definir_clientes(clientes_salvos)
-definir_agencias(agencias_salvas)
-definir_contas(contas_salvas)
-
 def menu():
     opcao = ""
     while opcao != "0": 
