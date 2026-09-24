@@ -38,6 +38,7 @@ def menu_de_opcoes():
         # Cadastrar conta
         elif opcao == "2":
             cpf = input("CPF do cliente: ")
+            numero = input("Numero da conta que deseja: ")
             codigo_agencia = input("Código da agência: ")
 
             cliente = buscar_cliente_por_cpf(cpf)
