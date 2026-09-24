@@ -1,4 +1,4 @@
-from menu import menu
+from menu import menu_de_opcoes
 from cliente import definir_clientes
 from agencia import definir_agencias
 from conta import definir_contas
@@ -9,7 +9,7 @@ definir_clientes(clientes_salvos)
 definir_agencias(agencias_salvas)
 definir_contas(contas_salvas)
             
-menu()
+menu_de_opcoes()
 
 salvar_dados_gerais_do_banco()
 print("Sessão encerrada.")
