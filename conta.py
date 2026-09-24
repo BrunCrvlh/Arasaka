@@ -7,11 +7,25 @@ proximo_numero_conta = 1
 #nao tenho muito q falar sobre essa funcao, é a mesma de antes mas alterada, tem o global ali pra poder modificar quem ta fora da funcao, monta a tupla e tem o saldo inicial de 1000.0
 def criacao_de_conta(cpfs, codigo_agencia, login, senha):
     global proximo_numero_conta
-    
-    nova_conta = (proximo_numero_conta, cpfs, codigo_agencia, login, senha, 0.0)
-    contas.append(nova_conta)
-    proximo_numero_conta = proximo_numero_conta + 1
-    return nova_conta
+
+    contas_criadas = []
+
+    for cpf in cpfs:
+        nova_conta = (
+            proximo_numero_conta,
+            cpf,
+            codigo_agencia,
+            login,
+            senha,
+            0.0
+        )
+
+        contas.append(nova_conta)
+        contas_criadas.append(nova_conta)
+
+        proximo_numero_conta = proximo_numero_conta + 1
+
+    return contas_criadas
 
 #substitui a lista inteira de contas por outra
 #ajeita o proximo_numero_conta, pra nao repetir o numero de conta depois de carregar os dados  
