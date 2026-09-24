@@ -11,19 +11,10 @@ def criacao_de_conta(cpfs, codigo_agencia, login, senha):
     contas_criadas = []
 
     for cpf in cpfs:
-        nova_conta = (
-            proximo_numero_conta,
-            cpf,
-            codigo_agencia,
-            login,
-            senha,
-            0.0
-        )
-
+        nova_conta = (proximo_numero_conta, cpf, codigo_agencia, login, senha, 0.0)
         contas.append(nova_conta)
         contas_criadas.append(nova_conta)
-
-        proximo_numero_conta = proximo_numero_conta + 1
+        proximo_numero_conta += 1
 
     return contas_criadas
 
