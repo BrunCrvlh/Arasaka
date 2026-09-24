@@ -42,27 +42,27 @@ def menu():
                 print("Cliente cadastrado com sucesso!")
 
         # Cadastrar conta
-        elif opcao == "2":
-            cpf = input("CPF do cliente: ")
-            codigo_agencia = input("Código da agência: ")
+         elif opcao == "2":
+             cpf = input("CPF do cliente: ")
+             codigo_agencia = input("Código da agência: ")
 
-            cliente = buscar_cliente_por_cpf(cpf)
+             cliente = buscar_cliente_por_cpf(cpf)
 
-            if cliente == None:
+             if cliente == None:
                 print("Cliente não encontrado!")
                 
-            agencia = buscar_agencia_por_codigo(codigo_agencia)
+             agencia = buscar_agencia_por_codigo(codigo_agencia)
 
-            elif agencia is None:
-                print("Agência não encontrada!")
+             elif agencia is None:
+                 print("Agência não encontrada!")
 
-            print('Crie sua conta: ')
-            login = input("Seu login: ")
-            senha = input("Sua senha: ")
+             print('Crie sua conta: ')
+             login = input("Seu login: ")
+             senha = input("Sua senha: ")
 
-            conta = criacao_de_conta(cpf, codigo_agencia, login, senha)
-            print("Conta criada com sucesso!")
-            print("Número da conta:", conta[0])
+             conta = criacao_de_conta(cpf, codigo_agencia, login, senha)
+             print("Conta criada com sucesso!")
+             print("Número da conta:", conta[0])
 
         # Cadastrar agência
         elif opcao == "3":
