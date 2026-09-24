@@ -55,8 +55,10 @@ def menu():
 
             elif agencia is None:
                 print("Agência não encontrada!")
-            login = input("Login: ")
-            senha = input("Senha: ")
+
+            print('Crie sua conta: ')
+            login = input("Seu login: ")
+            senha = input("Sua senha: ")
 
             conta = criacao_de_conta(cpf, codigo_agencia, login, senha)
             print("Conta criada com sucesso!")
