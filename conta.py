@@ -40,7 +40,7 @@ def buscar_conta_por_numero(numero):
 
 #essa funcao aqui me deu orgulho, ela basicamente serve pra gente atualizar o saldo, so que uma tupla é imutavel, entao basicamente ela percorre a lista procurando a conta que precisa ser alterada, monta uma tupla nova com as mesmas informacoes e mas altera o saldo e substitui a conta q tava antes 
 def indice_da_conta(numero):
-    for indice in range (len(contas)):
+    for indice in range(len(contas)):
         if contas[indice][0] == numero:
             return indice
     return -1
@@ -102,7 +102,7 @@ def sacar(numero_conta, valor):
 def transferir(numero_conta_origem, numero_conta_destino, valor):
     indice_origem = indice_da_conta(numero_conta_origem)
     indice_destino = indice_da_conta(numero_conta_destino)
-    if indice_origem == -1 or indice_destino == -1:
+    if indice_origem < 0 or indice_destino < 0:
         print("conta de origem ou destino nao encontrada")
         return False
     conta_origem = contas[indice_origem]
