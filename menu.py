@@ -141,5 +141,8 @@ def menu_de_opcoes():
             print("Montante total do banco: R$", montante_total_banco())
             
         else:
-            print("Opção inválida!")
+            if opcao == "0"
+                print("Sessão encerrada")
+            else:
+                print("Opção inválida!")
         
