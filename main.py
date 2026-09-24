@@ -12,4 +12,3 @@ definir_contas(contas_salvas)
 menu_de_opcoes()
 
 salvar_dados_gerais_do_banco()
-print("Sessão encerrada.")
