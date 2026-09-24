@@ -47,12 +47,11 @@ def menu():
              codigo_agencia = input("Código da agência: ")
 
              cliente = buscar_cliente_por_cpf(cpf)
-
-             if cliente == None:
-                print("Cliente não encontrado!")
-                
              agencia = buscar_agencia_por_codigo(codigo_agencia)
 
+             if cliente == None:
+                print("Cliente não encontrado!")                
+             
              elif agencia is None:
                  print("Agência não encontrada!")
              print('Crie sua conta: ')
