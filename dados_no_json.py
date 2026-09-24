@@ -7,14 +7,14 @@ def salvar_dados_gerais_do_banco(clientes, agencias, contas):
 def carrega_dados_gerais_do_banco():
     with open("dados.json", "r") as arquivo:
         dados = json.load(arquivo)
-        clientes = []
-        agencias = []
-        contas = []
+        clientes_salvos = []
+        agencias_salvos = []
+        contas_salvos = []
        
         for cliente in dados[0]:
-            clientes.append(tuple(cliente))
+            clientes_salvos.append(tuple(cliente))
         for agencia in dados[1]:
-            agencias.append(tuple(agencia))
+            agencias_salvos.append(tuple(agencia))
         for conta in dados[2]:
-            contas.append(tuple(conta))
-        return clientes, agencias, contas
+            contas_salvos.append(tuple(conta))
+        return clientes_salvos, agencias_salvos, contas_salvos
