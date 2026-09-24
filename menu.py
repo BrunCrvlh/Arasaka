@@ -47,13 +47,21 @@ def menu():
              
              elif agencia is None:
                  print("Agência não encontrada!")
-             print('Crie sua conta: ')
-             login = input("Seu login: ")
-             senha = input("Sua senha: ")
-             conta = criacao_de_conta(cpf, codigo_agencia, login, senha)
-        
-             print("Conta criada com sucesso!")
-             print("Número da conta:", conta[0])
+                 print('Crie sua conta: ')
+                 login = input("Seu login: ")
+                 senha = input("Sua senha: ")
+
+                 cpfs = [cpf]
+
+                 contas_criadas = criacao_de_conta(
+                   cpfs,
+                   codigo_agencia,
+                   login,
+                   senha
+                )
+
+                 print("Conta criada com sucesso!")
+                 print("Número da conta:", contas_criadas[0][0])
 
         # Cadastrar agência
         elif opcao == "3":
