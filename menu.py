@@ -22,12 +22,9 @@ def menu_de_opcoes():
         print("0 - Sair")
 
         opcao = input("Escolha uma opção: ")
- 
-        if opcao == "0":
-            print("Sessão finalizada!")
         
         # Cadastrar cliente
-        elif opcao == "1":
+        if opcao == "1":
             nome = input("Nome do cliente: ")
             cpf = input("CPF: ")
             cliente = criar_cliente(nome, cpf)
