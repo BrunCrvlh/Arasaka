@@ -33,27 +33,27 @@ def menu():
         opcao = input("Escolha uma opção: ")
         
         # Cadastrar cliente
-        if opcao == "2":
+        if opcao == "1":
             nome = input("Nome do cliente: ")
             cpf = input("CPF: ")
             cliente = criar_cliente(nome, cpf)
 
-            if cliente != ():
+            if cliente is not None:
                 print("Cliente cadastrado com sucesso!")
 
         # Cadastrar conta
-        elif opcao == "3":
+        elif opcao == "2":
             cpf = input("CPF do cliente: ")
             codigo_agencia = input("Código da agência: ")
 
             cliente = buscar_cliente_por_cpf(cpf)
 
-            if cliente == ():
+            if cliente == None:
                 print("Cliente não encontrado!")
 
             agencia = buscar_agencia_por_codigo(codigo_agencia)
 
-            elif agencia ():
+            elif agencia is None:
                 print("Agência não encontrada!")
             login = input("Login: ")
             senha = input("Senha: ")
@@ -63,7 +63,7 @@ def menu():
             print("Número da conta:", conta[0])
 
         # Cadastrar agência
-        elif opcao == "4":
+        elif opcao == "3":
 
             codigo = input("Código da agência: ")
             nome = input("Nome da agência: ")
@@ -71,23 +71,23 @@ def menu():
 
             agencia = criar_agencia(codigo, nome, cidade)
 
-            if agencia != ():
+            if agencia is not None:
                 print("Agência cadastrada com sucesso!")
 
         # Listar contas
-        elif opcao == "5":
+        elif opcao == "4":
             listar_contas()
 
         # Lista agências
-        elif opcao == "6":
+        elif opcao == "5":
             listar_agencias()
 
         # Listar clientes
-        elif opcao == "7":
+        elif opcao == "6":
             listar_clientes()
 
         # Sacar
-        elif opcao == "8":
+        elif opcao == "7":
             numero = int(input("Número da conta: "))
             valor = float(input("Valor do saque: "))
 
@@ -95,7 +95,7 @@ def menu():
                 print("Saque realizado com sucesso!")
 
         # Transferir
-        elif opcao == "9":
+        elif opcao == "8":
             origem = int(input("Conta de origem: "))
             destino = int(input("Conta de destino: "))
             valor = float(input("Valor da transferência: "))
@@ -104,7 +104,7 @@ def menu():
                 print("Transferência realizada com sucesso!")
 
         # Depositar
-        elif opcao == "10":
+        elif opcao == "9":
             numero = int(input("Número da conta: "))
             valor = float(input("Valor do depósito: "))
 
@@ -112,7 +112,7 @@ def menu():
                 print("Depósito realizado com sucesso!")
 
         # Consultar saldo
-        elif opcao == "11":
+        elif opcao == "10":
             numero = int(input("Número da conta: "))
             saldo = consultar_saldo(numero)
 
@@ -120,7 +120,7 @@ def menu():
                 print("Saldo: R$", saldo)
 
         # Relatório do banco
-        elif opcao == "12":
+        elif opcao == "11":
             print("\n========== RELATÓRIO DO BANCO ==========")
             print("Quantidade de clientes:", len(clientes))
             print("Quantidade de agências:", len(agencias))
@@ -128,18 +128,18 @@ def menu():
             print("Montante total do banco: R$", montante_total_banco())
 
         # Montante total da agência
-        elif opcao == "13":
+        elif opcao == "12":
             codigo = input("Código da agência: ")
             agencia = buscar_agencia_por_codigo(codigo)
 
-            if agencia == ():
+            if agencia == None:
                 print("Agência não encontrada!")
             else:
                 total = montante_total_agencia(codigo, contas)
                 print("Montante total da agência: R$",total)
 
         # Montante total do banco
-        elif opcao == "14":
+        elif opcao == "13":
             print("Montante total do banco: R$", montante_total_banco())
             
         else:
