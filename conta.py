@@ -122,5 +122,5 @@ def transferir(numero_conta_origem, numero_conta_destino, valor):
 def montante_total_banco():
     total = 0
     for conta in contas:
-        total = total + conta[5]
+        total += conta[5]
     return total
