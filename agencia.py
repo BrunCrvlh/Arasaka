@@ -1,5 +1,5 @@
 # Lista de agências
-# Cada agência é uma tupla: (codigo, nome, cidade)
+# Cada agência é uma tripla: (codigo, nome, cidade)
 agencias = []
 
 
@@ -38,13 +38,8 @@ def listar_agencias():
     print("\n------- AGÊNCIAS -------")
 
     for agencia in agencias:
-        print(
-            "Código:", agencia[0],
-            "| Nome:", agencia[1],
-            "| Cidade:", agencia[2]
-        )
-
-
+        print("Código:", agencia[0], "| Nome:", agencia[1],"| Cidade:", agencia[2])
+        
 # Calcula o dinheiro total das contas pertencentes à agência
 def montante_total_agencia(codigo, contas):
     total = 0.0
