@@ -31,7 +31,7 @@ def listar_clientes ():
     
   print("\n------- CLIENTES -------")
   for cliente in clientes: 
-      nome = cliente[0]
-      cpf = cliente[1]
+      nome = cliente['Nome']
+      cpf = cliente['CPF']
       print ("nome:", nome, " CPF:", cpf)
   print("---------------------------")
