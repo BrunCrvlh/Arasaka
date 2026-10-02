@@ -50,12 +50,22 @@ def menu_de_opcoes():
                 login = input("Seu login: ")
                 senha = input("Sua senha: ")
 
-                cpfs = [cpf]
+                print("\nTipos de conta:")
+                print("1 - Salário")
+                print("2 - Corrente")
+                print("3 - Poupança")
 
-                contas_criadas = criacao_de_conta(cpfs, codigo_agencia, login, senha)
+                opcao_tipo = input("Escolha o tipo de conta: ")
 
-                print("Conta criada com sucesso!")
-                print("Número da conta:", contas_criadas[0][0])
+                if opcao_tipo == "1":
+                    tipo = "salário"
+                elif opcao_tipo == "2":
+                    tipo = "corrente"
+                elif opcao_tipo == "3":
+                    tipo = "poupança"
+                else:
+                    print("Tipo de conta inválido!")
+                    continue
 
         # Cadastrar agência
         elif opcao == "3":
