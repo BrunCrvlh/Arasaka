@@ -16,15 +16,7 @@ def criacao_de_conta(cpfs, codigo_agencia, login, senha, tipo):
             print("Tipo de conta inválido!")
             return None
 
-        nova_conta = {
-            "numero": proximo_numero_conta,
-            "cpf": cpf,
-            "codigo_agencia": codigo_agencia,
-            "login": login,
-            "senha": senha,
-            "saldo": 0.0,
-            "tipo": tipo
-        }
+        nova_conta = {"numero": proximo_numero_conta, "cpf": cpf, "codigo_agencia": codigo_agencia, "login": login, "senha": senha, "saldo": 0.0, "tipo": tipo}
 
         contas.append(nova_conta)
         contas_criadas.append(nova_conta)
