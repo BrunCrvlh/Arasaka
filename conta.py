@@ -5,16 +5,31 @@ proximo_numero_conta = 1
 
 #como o cpf ja identifica o cliente, eu optei por tirar o nome do cliente dessa funcao ok
 #nao tenho muito q falar sobre essa funcao, é a mesma de antes mas alterada, tem o global ali pra poder modificar quem ta fora da funcao, monta a tupla e tem o saldo inicial de 1000.0
-def criacao_de_conta(cpfs, codigo_agencia, login, senha):
+def criacao_de_conta(cpfs, codigo_agencia, login, senha, tipo):
     global proximo_numero_conta
 
     contas_criadas = []
 
     for cpf in cpfs:
-        nova_conta = (proximo_numero_conta, cpf, codigo_agencia, login, senha, 0.0)
+
+        if tipo not in ["salário", "corrente", "poupança"]:
+            print("Tipo de conta inválido!")
+            return None
+
+        nova_conta = {
+            "numero": proximo_numero_conta,
+            "cpf": cpf,
+            "codigo_agencia": codigo_agencia,
+            "login": login,
+            "senha": senha,
+            "saldo": 0.0,
+            "tipo": tipo
+        }
+
         contas.append(nova_conta)
         contas_criadas.append(nova_conta)
-        proximo_numero_conta += 1
+
+        proximo_numero_conta = proximo_numero_conta + 1
 
     return contas_criadas
 
