@@ -9,7 +9,7 @@ def criar_agencia(codigo, nome, cidade):
         print("Código de agência já cadastrado!")
         return None
 
-    nova_agencia = (codigo, nome, cidade)
+    nova_agencia = {'Codigo da agencia': codigo,'Nome da agencia': nome, 'Cidade': cidade}
     agencias.append(nova_agencia)
 
     return nova_agencia
@@ -23,9 +23,8 @@ def definir_agencias(lista):
 # Procura uma agência pelo código
 def buscar_agencia_por_codigo(codigo):
     for agencia in agencias:
-        if agencia[0] == codigo:
+        if agencia['Codigo da agencia'] == codigo:
             return agencia
-
     return None
 
 
@@ -38,7 +37,7 @@ def listar_agencias():
     print("\n------- AGÊNCIAS -------")
 
     for agencia in agencias:
-        print("Código:", agencia[0], "| Nome:", agencia[1],"| Cidade:", agencia[2])
+        print(agencia\n)
         
 # Calcula o dinheiro total das contas pertencentes à agência
 def montante_total_agencia(codigo, contas):
@@ -46,7 +45,6 @@ def montante_total_agencia(codigo, contas):
 
     for conta in contas:
         # conta[2] é o código da agência e conta[5] é o saldo.
-        if conta[2] == codigo:
-            total = total + conta[5]
-
+        if conta['Numero da conta'] == codigo:
+            total = total + conta['Saldo']
     return total
