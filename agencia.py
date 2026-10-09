@@ -48,5 +48,5 @@ def montante_total_agencia(codigo, contas):
     for conta in contas:
         # conta[2] é o código da agência e conta[5] é o saldo.
         if conta['codigo_agencia'] == codigo:
-            total = total + conta['Saldo']
+            total = total + conta['saldo']
     return total
