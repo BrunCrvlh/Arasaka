@@ -117,7 +117,7 @@ def transferir(numero_conta_origem, numero_conta_destino, valor):
     return False
 
 #percorre todas as contas e soma o saldo
-def montante_total_banco(contas):
+def montante_total_banco():
     total = 0.0
     for conta in contas:
         total += conta["saldo"]
