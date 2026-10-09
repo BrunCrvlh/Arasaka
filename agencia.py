@@ -37,7 +37,9 @@ def listar_agencias():
     print("\n------- AGÊNCIAS -------")
 
     for agencia in agencias:
-        print(agencia)
+        print("codigo:", agencia['Codigo de agencia'],
+              " Nome:", agencia['Nome da agencia'],
+              " Cidade:", agencia['Cidade']
         
 # Calcula o dinheiro total das contas pertencentes à agência
 def montante_total_agencia(codigo, contas):
@@ -45,6 +47,6 @@ def montante_total_agencia(codigo, contas):
 
     for conta in contas:
         # conta[2] é o código da agência e conta[5] é o saldo.
-        if conta['Numero da conta'] == codigo:
+        if conta['codigo_agencia'] == codigo:
             total = total + conta['Saldo']
     return total
