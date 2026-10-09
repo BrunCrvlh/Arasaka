@@ -2,19 +2,12 @@ import json
 
 def salvar_dados_gerais_do_banco(clientes, agencias, contas):
    with open("dados.json", "w", encoding="utf-8") as arquivo:
-        json.dump([clientes, agencias, contas], arquivo, indent=1)
+        json.dump([clientes, agencias, contas], arquivo, indent=1, ensure_ascii=False)
 
 def carrega_dados_gerais_do_banco():
-    with open("dados.json", "r") as arquivo:
-        dados = json.load(arquivo)
-        clientes = []
-        agencias = []
-        contas = []
-       
-        for cliente in dados[0]:
-            clientes.append(tuple(cliente))
-        for agencia in dados[1]:
-            agencias.append(tuple(agencia))
-        for conta in dados[2]:
-            contas.append(tuple(conta))
-        return clientes, agencias, contas
+    if not os.path.exists("dados.json") or os.path.getsize("dados.json") == 0:
+       return [], [], []
+
+    with open ("dados.json", "r", encoding="utf-8") as arquivo:
+       clientes, agencias, contas= json.load(arquivo)
+       return clientes, agencias, contas
