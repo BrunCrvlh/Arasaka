@@ -37,7 +37,7 @@ def listar_agencias():
     print("\n------- AGÊNCIAS -------")
 
     for agencia in agencias:
-        print(agencia\n)
+        print(agencia)
         
 # Calcula o dinheiro total das contas pertencentes à agência
 def montante_total_agencia(codigo, contas):
