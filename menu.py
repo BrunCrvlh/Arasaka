@@ -73,11 +73,9 @@ def menu_de_opcoes():
 
             if cliente is None:
                 print("Cliente não encontrado!")
-                continue
 
             if agencia is None:
                 print("Agência não encontrada!")
-                continue
 
             print("\n========== CRIAR CONTA ==========")
 
@@ -102,7 +100,6 @@ def menu_de_opcoes():
 
             else:
                 print("Tipo de conta inválido!")
-                continue
 
             cpfs = [cpf]
 
