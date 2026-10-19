@@ -132,9 +132,17 @@ def menu_de_opcoes():
 
         # Listar contas
         elif opcao == "4":
-
-            listar_contas()
-
+            print("Quais contas voce quer listar?")
+            print("1 - Todas as contas do banco.")
+            print("2 - Minhas contas do banco.")
+            escolha = input("Digite a opcao desejada: ")
+        
+            if escolha == "1":
+                listar_contas()
+            elif escolha == "2":
+                buscar_contas_do_cliente()
+            else:
+                print("Opcao invalida!")
         # Listar agências
         elif opcao == "5":
 
