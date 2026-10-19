@@ -12,6 +12,8 @@ from conta import (
     depositar,
     sacar,
     transferir,
+    buscar_contas_do_cliente,
+    buscar_conta_por_numero
     listar_contas,
     montante_total_banco,
     definir_contas,
