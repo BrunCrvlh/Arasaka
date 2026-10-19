@@ -20,7 +20,7 @@ def definir_clientes(lista):
 def buscar_cliente_por_cpf(cpf): 
   for cliente in clientes:
     if cliente['CPF'] == cpf:
-      return cliente['CPF']
+      return cliente
   return None
       
 #percorre a lista clientes e faz uma listinha com as informacoes das tuplas existentes, nada demais
