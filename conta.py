@@ -50,7 +50,15 @@ def buscar_conta_por_numero(numero):
             return conta
     return None
 
-#essa funcao aqui me deu orgulho, ela basicamente serve pra gente atualizar o saldo, so que uma tupla é imutavel, entao basicamente ela percorre a lista procurando a conta que precisa ser alterada, monta uma tupla nova com as mesmas informacoes e mas altera o saldo e substitui a conta q tava antes 
+#para um cliente com várias contas, essa função consegue buscar essas contas comparando o cpf de cada uma delas ao do cliente, se for igual, a função printa na tela a conta.
+def buscar_contas_do_cliente(cpf):
+    print("---------------Suas Contas---------------")
+    for conta in contas:
+        if conta["cpf"] == cpf:              
+            print(f"Conta Nº {conta["numero"]} - {conta["numero da conta"]}")
+    return None
+
+#
 def indice_da_conta(numero):
     for indice in range(len(contas)):
         if contas[indice]["numero"] == numero:
