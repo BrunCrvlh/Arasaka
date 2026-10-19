@@ -50,12 +50,15 @@ def buscar_conta_por_numero(numero):
             return conta
     return None
 
-#para um cliente com várias contas, essa função consegue buscar essas contas comparando o cpf de cada uma delas ao do cliente, se for igual, a função printa na tela a conta.
+#para um cliente com várias contas, essa função consegue buscar essas contas comparando o cpf de cada uma delas ao do cliente, se for igual, a função imprime na tela as contas.
 def buscar_contas_do_cliente(cpf):
-    print("---------------Suas Contas---------------")
-    for conta in contas:
-        if conta["cpf"] == cpf:              
-            print(f"Conta Nº {conta["numero"]} - {conta["numero da conta"]}")
+    if cpf in cpfs:        
+        print("---------------Suas Contas---------------")
+        for conta in contas:
+            if conta["cpf"] == cpf:              
+                print(f"Conta Nº {conta["numero"]} - {conta["numero da conta"]}")
+    else:
+        print("CPF inserido nao encontrado!")
     return None
 
 #
