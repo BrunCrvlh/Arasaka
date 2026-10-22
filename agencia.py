@@ -37,7 +37,7 @@ def listar_agencias():
     print("\n------- AGÊNCIAS -------")
 
     for agencia in agencias:
-        print("codigo:", agencia['Codigo de agencia'],
+        print("codigo:", agencia['Codigo da agencia'],
               " Nome:", agencia['Nome da agencia'],
               " Cidade:", agencia['Cidade']
         
