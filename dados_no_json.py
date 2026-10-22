@@ -1,4 +1,5 @@
 import json
+import os
 
 def salvar_dados_gerais_do_banco(clientes, agencias, contas):
    with open("dados.json", "w", encoding="utf-8") as arquivo:
