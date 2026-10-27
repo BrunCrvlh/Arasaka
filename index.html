@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<section class="hero">
+  <div class="watermark">荒坂</div>
+  <span class="tag">Divisão financeira</span>
+  <h1>Seu patrimônio.<br><span>Sob nosso controle.</span></h1>
+  <p>Contas salário, corrente e poupança com a segurança de uma megacorporação. Abra sua conta em segundos e movimente seu dinheiro de qualquer terminal.</p>
+  <div class="acoes">
+    {% if session.get('numero') %}
+      <a class="btn" href="{{ url_for('painel') }}">Ir para o painel</a>
+    {% else %}
+      <a class="btn" href="{{ url_for('abrir_conta') }}">Abrir conta</a>
+      <a class="btn ghost" href="{{ url_for('entrar') }}">Acessar conta</a>
+    {% endif %}
+  </div>
+</section>
+<div class="grid">
+  <div class="card"><h3>Depósitos</h3>Envie dinheiro para sua conta na hora.</div>
+  <div class="card"><h3>Transferências</h3>Entre contas do banco, confirmadas com sua senha.</div>
+  <div class="card"><h3>Extrato</h3>Cada movimentação registrada, com data e hora.</div>
+</div>
+{% endblock %}

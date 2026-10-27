@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>Olá, {{ cliente['Nome'].split(' ')[0] }}</h1>
+<div class="grid" style="margin-bottom:22px">
+  <div class="card"><h3>Saldo disponível</h3><div class="kpi big">{{ conta['saldo']|brl }}</div></div>
+  <div class="card"><h3>Conta</h3><div class="kpi">Nº {{ conta['numero'] }}</div>
+    <span class="tag">{{ conta['tipo'] }}</span>
+    <div class="mut" style="margin-top:8px">Agência {{ conta['codigo_agencia'] }}{% if agencia %} · {{ agencia['Nome da agencia'] }}{% endif %}</div></div>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px">
+  <a class="btn" href="{{ url_for('operacoes') }}">Depositar / Sacar / Transferir</a>
+  <a class="btn ghost" href="{{ url_for('extrato') }}">Ver extrato completo</a>
+</div>
+<div class="card"><h3>Últimas movimentações</h3>
+  <div class="scroll"><table><tr><th>Data</th><th>Tipo</th><th>Descrição</th><th>Valor</th></tr>
+  {% for l in ultimos %}<tr><td>{{ l['data'] }}</td><td>{{ l['tipo'] }}</td><td>{{ l['descricao'] }}</td>
+    <td class="{{ 'pos' if l['valor'] > 0 else 'neg' }}">{{ l['valor']|brl }}</td></tr>
+  {% else %}<tr><td colspan="4" class="mut">Nenhuma movimentação ainda.</td></tr>{% endfor %}
+  </table></div>
+</div>
+{% endblock %}

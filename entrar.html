@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="narrow"><div class="card">
+  <h1>Acesso ao terminal</h1>
+  <form method="post">
+    <label>Login</label><input name="login" autofocus required>
+    <label>Senha</label><input name="senha" type="password" required>
+    <button>Autenticar</button>
+  </form>
+  <p class="mut">Ainda não tem conta? <a href="{{ url_for('abrir_conta') }}">Abra agora</a>.</p>
+</div></div>
+{% endblock %}
