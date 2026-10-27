@@ -1,4 +1,3 @@
-#
 clientes = []
 
 #funcaozinha q verifica se o cpf ja foi usado pra criar algum cliente, e se o cpf ainda n foi utilizado, vai montar a tupla (nome,cpf) e adiciona na lista, e depois disso retorna a tupla pro main 
@@ -23,15 +22,3 @@ def buscar_cliente_por_cpf(cpf):
       return cliente
   return None
       
-#percorre a lista clientes e faz uma listinha com as informacoes das tuplas existentes, nada demais
-def listar_clientes ():
-  if len(clientes) == 0:
-    print("Nenhum cliente cadastrado.")
-    return
-    
-  print("\n------- CLIENTES -------")
-  for cliente in clientes: 
-      nome = cliente['Nome']
-      cpf = cliente['CPF']
-      print ("nome:", nome, " CPF:", cpf)
-  print("---------------------------")
