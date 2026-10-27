@@ -27,26 +27,12 @@ def buscar_agencia_por_codigo(codigo):
             return agencia
     return None
 
-
-# Mostra todas as agências cadastradas
-def listar_agencias():
-    if len(agencias) == 0:
-        print("Nenhuma agência cadastrada.")
-        return
-
-    print("\n------- AGÊNCIAS -------")
-
-    for agencia in agencias:
-        print("codigo:", agencia['Codigo da agencia'],
-              " Nome:", agencia['Nome da agencia'],
-              " Cidade:", agencia['Cidade']
-        
 # Calcula o dinheiro total das contas pertencentes à agência
 def montante_total_agencia(codigo, contas):
     total = 0.0
 
     for conta in contas:
-        # conta[2] é o código da agência e conta[5] é o saldo.
+        # confere se a conta pertence à agência e soma o saldo
         if conta['codigo_agencia'] == codigo:
             total = total + conta['saldo']
     return total
