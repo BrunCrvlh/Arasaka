@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="narrow" style="max-width:640px"><div class="card">
+  <h1>Abertura de conta</h1>
+  {% if agencias|length == 0 %}
+    <p class="mut">Nenhuma agência disponível no momento. A gerência precisa cadastrar uma agência antes.</p>
+  {% else %}
+  <form method="post">
+    <div class="row">
+      <div><label>Nome completo</label><input name="nome" required></div>
+<div><label>CPF (11 números)</label><input name="cpf" inputmode="numeric" maxlength="11" pattern="[0-9]{11}" title="Digite os 11 números do CPF, sem pontos ou traço" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required></div>
+    </div>
+    <div class="row">
+      <div><label>Agência</label>
+        <select name="codigo_agencia">
+          {% for a in agencias %}<option value="{{ a['Codigo da agencia'] }}">{{ a['Codigo da agencia'] }} · {{ a['Nome da agencia'] }} ({{ a['Cidade'] }})</option>{% endfor %}
+        </select></div>
+      <div><label>Tipo de conta</label>
+        <select name="tipo"><option value="corrente">Corrente</option><option value="poupança">Poupança</option><option value="salário">Salário</option></select></div>
+    </div>
+    <div class="row">
+      <div><label>Login</label><input name="login" required></div>
+      <div><label>Senha</label><input name="senha" type="password" required></div>
+    </div>
+    <button>Abrir conta</button>
+  </form>
+  {% endif %}
+</div></div>
+{% endblock %}
