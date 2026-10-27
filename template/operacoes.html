@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>Operações</h1>
+<p class="mut">Saldo atual: <strong style="color:#fff">{{ conta['saldo']|brl }}</strong></p>
+<div class="grid">
+  <div class="card"><h3>Depositar</h3>
+    <form method="post"><input type="hidden" name="operacao" value="depositar">
+    <label>Valor (R$)</label><input name="valor" inputmode="decimal" required><button>Depositar</button></form></div>
+  <div class="card"><h3>Sacar</h3>
+    <form method="post"><input type="hidden" name="operacao" value="sacar">
+    <label>Valor (R$)</label><input name="valor" inputmode="decimal" required>
+    <label>Senha de confirmação</label><input name="senha" type="password" required><button>Sacar</button></form></div>
+  <div class="card"><h3>Transferir</h3>
+    <form method="post"><input type="hidden" name="operacao" value="transferir">
+    <label>Conta de destino</label><input name="destino" inputmode="numeric" required>
+    <label>Valor (R$)</label><input name="valor" inputmode="decimal" required>
+    <label>Senha de confirmação</label><input name="senha" type="password" required><button>Transferir</button></form></div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block titulo %}Arasaka Bank{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header><div class="bar">
+  <a class="brand" href="{{ url_for('index') }}"><span class="kanji">荒坂</span> ARASAKA BANK</a>
+  <nav>
+  {% if session.get('numero') %}
+    <a href="{{ url_for('painel') }}">Painel</a>
+    <a href="{{ url_for('operacoes') }}">Operações</a>
+    <a href="{{ url_for('extrato') }}">Extrato</a>
+    <a class="sair" href="{{ url_for('sair') }}">Encerrar sessão</a>
+  {% elif session.get('admin') %}
+    <a href="{{ url_for('admin') }}">Central</a>
+    <a href="{{ url_for('admin_agencias') }}">Agências</a>
+    <a href="{{ url_for('admin_clientes') }}">Clientes</a>
+    <a href="{{ url_for('admin_contas') }}">Contas</a>
+    <a class="sair" href="{{ url_for('sair') }}">Sair</a>
+  {% else %}
+    <a href="{{ url_for('abrir_conta') }}">Abrir conta</a>
+    <a href="{{ url_for('entrar') }}">Acessar conta</a>
+    <a href="{{ url_for('admin_entrar') }}">Gerência</a>
+  {% endif %}
+  </nav>
+</div></header>
+<main>
+  {% with mensagens = get_flashed_messages(with_categories=true) %}
+    {% for categoria, texto in mensagens %}<div class="msg {{ categoria }}">{{ texto }}</div>{% endfor %}
+  {% endwith %}
+  {% block conteudo %}{% endblock %}
+</main>
+<footer>Arasaka Bank</footer>
+<script>
+document.querySelectorAll('input[type="password"]').forEach(function(campo){
+  var rotulo = document.createElement('label');
+  rotulo.className = 'mostrar-senha';
+  var caixa = document.createElement('input');
+  caixa.type = 'checkbox';
+  caixa.onchange = function(){ campo.type = caixa.checked ? 'text' : 'password'; };
+  rotulo.appendChild(caixa);
+  rotulo.appendChild(document.createTextNode(' mostrar senha'));
+  campo.after(rotulo);
+});
+</script>
+</body>
+</html>

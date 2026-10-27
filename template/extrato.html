@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>Extrato · Conta {{ conta['numero'] }}</h1>
+<div class="card">
+  <div class="scroll"><table><tr><th>Data</th><th>Tipo</th><th>Descrição</th><th>Valor</th></tr>
+  {% for l in linhas %}<tr><td>{{ l['data'] }}</td><td>{{ l['tipo'] }}</td><td>{{ l['descricao'] }}</td>
+    <td class="{{ 'pos' if l['valor'] > 0 else 'neg' }}">{{ l['valor']|brl }}</td></tr>
+  {% else %}<tr><td colspan="4" class="mut">Nenhuma movimentação ainda.</td></tr>{% endfor %}
+  </table></div>
+  <p class="mut">Saldo atual: <strong style="color:#fff">{{ conta['saldo']|brl }}</strong></p>
+</div>
+{% endblock %}
