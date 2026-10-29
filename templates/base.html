@@ -10,7 +10,7 @@
 </head>
 <body>
 <header><div class="bar">
-  <a class="brand" href="{{ url_for('index') }}"><span class="kanji">荒坂</span> ARASAKA BANK</a>
+  <a class="brand" href="{{ url_for('index') }}"><img class="logo" src="{{ url_for('static', filename='Arasaka.png') }}" alt="Arasaka"> ARASAKA BANK</a>
   <nav>
   {% if session.get('numero') %}
     <a href="{{ url_for('painel') }}">Painel</a>
