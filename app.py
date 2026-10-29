@@ -139,6 +139,7 @@ def abrir_conta():
 
 
 #manda pro painel.html a conta, o cliente, a agência e as 5 últimas movimentações
+@app.route("/painel")
 def painel():
     conta = conta_logada()
     if conta is None:
