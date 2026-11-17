@@ -1,17 +1,3 @@
-{% extends "base.html" %}
-{% block conteudo %}
-<h1>Central de comando</h1>
-<div class="grid" style="margin-bottom:22px">
-  <div class="card"><h3>Clientes</h3><div class="kpi">{{ qtd_clientes }}</div></div>
-  <div class="card"><h3>Agências</h3><div class="kpi">{{ qtd_agencias }}</div></div>
-  <div class="card"><h3>Contas</h3><div class="kpi">{{ qtd_contas }}</div></div>
-  <div class="card"><h3>Montante do banco</h3><div class="kpi">{{ total|brl }}</div></div>
-</div>
-<div class="card"><h3>Montante por agência</h3>
-  <div class="scroll"><table><tr><th>Código</th><th>Agência</th><th>Cidade</th><th>Contas</th><th>Montante</th></tr>
-  {% for p in por_agencia %}<tr><td>{{ p.agencia['Codigo da agencia'] }}</td><td>{{ p.agencia['Nome da agencia'] }}</td>
-    <td>{{ p.agencia['Cidade'] }}</td><td>{{ p.qtd }}</td><td>{{ p.total|brl }}</td></tr>
-  {% else %}<tr><td colspan="5" class="mut">Nenhuma agência cadastrada.</td></tr>{% endfor %}
-  </table></div>
-</div>
-{% endblock %}
+{% extends 'base.html' %}{% block conteudo %}<div class="titulo-linha"><div><p class="sobretitulo">GERÊNCIA</p><h1>Visão geral do banco.</h1><p>Cadastros e saldos consolidados em um só lugar.</p></div><a class="btn" href="{{ url_for('admin_agencias') }}">Gerenciar agências ↗</a></div>
+<div class="grade quatro indicadores"><div class="card"><small>Total dos saldos</small><strong>{{ total|brl }}</strong></div><div class="card"><small>Clientes</small><strong>{{ qtd_clientes }}</strong></div><div class="card"><small>Contas</small><strong>{{ qtd_contas }}</strong></div><div class="card"><small>Agências</small><strong>{{ qtd_agencias }}</strong></div></div>
+<section class="card"><h2>Distribuição por agência</h2><p>O montante é a soma do saldo das contas de cada agência.</p><div class="tabela-scroll"><table><thead><tr><th>Agência</th><th>Cidade</th><th>Contas</th><th class="direita">Montante</th></tr></thead><tbody>{% for item in por_agencia %}<tr><td><strong>{{ item.agencia.identificacao() }}</strong></td><td>{{ item.agencia.cidade }}</td><td>{{ item.quantidade }}</td><td class="direita valor">{{ item.total|brl }}</td></tr>{% endfor %}</tbody></table></div></section>{% endblock %}
