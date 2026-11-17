@@ -1,29 +1,10 @@
-{% extends "base.html" %}
-{% block conteudo %}
-<div class="narrow" style="max-width:640px"><div class="card">
-  <h1>Abertura de conta</h1>
-  {% if agencias|length == 0 %}
-    <p class="mut">Nenhuma agência disponível no momento. A gerência precisa cadastrar uma agência antes.</p>
-  {% else %}
-  <form method="post">
-    <div class="row">
-      <div><label>Nome completo</label><input name="nome" required></div>
-<div><label>CPF</label><input name="cpf" inputmode="numeric" maxlength="11" pattern="[0-9]{11}" title="Digite os 11 números do CPF, sem pontos ou traço" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required></div>
-    </div>
-    <div class="row">
-      <div><label>Agência</label>
-        <select name="codigo_agencia">
-          {% for a in agencias %}<option value="{{ a['Codigo da agencia'] }}">{{ a['Codigo da agencia'] }} · {{ a['Nome da agencia'] }} ({{ a['Cidade'] }})</option>{% endfor %}
-        </select></div>
-      <div><label>Tipo de conta</label>
-        <select name="tipo"><option value="corrente">Corrente</option><option value="poupança">Poupança</option><option value="salário">Salário</option></select></div>
-    </div>
-    <div class="row">
-      <div><label>Login</label><input name="login" required></div>
-      <div><label>Senha</label><input name="senha" type="password" required></div>
-    </div>
-    <button>Abrir conta</button>
-  </form>
-  {% endif %}
-</div></div>
-{% endblock %}
+{% extends 'base.html' %}
+{% block titulo %}Abra sua conta · Arasaka Bank{% endblock %}
+{% block conteudo %}<div class="layout-form abertura">
+<section class="form-intro"><p class="sobretitulo">COMECE POR AQUI</p><h1>Seu próximo<br>passo é simples.</h1><p>Preencha seus dados e escolha a conta que combina com a sua organização.</p><ol class="passos"><li><strong>Seus dados</strong><span>Nome e CPF identificam o titular.</span></li><li><strong>Sua conta</strong><span>Escolha a agência e o tipo de conta.</span></li><li><strong>Seu acesso</strong><span>Crie um login e uma senha.</span></li></ol><p class="mut">Já é cliente? Você pode abrir outra conta com o mesmo CPF e um login diferente.</p></section>
+<section class="card formulario"><p class="sobretitulo">ABERTURA DE CONTA</p><h2>Vamos começar?</h2><p>Todos os campos são obrigatórios.</p>
+<form method="post"><fieldset><legend>01 · Dados do titular</legend><label for="nome">Nome completo</label><input id="nome" name="nome" autocomplete="name" value="{{ request.form.get('nome', '') }}" required>
+<label for="cpf">CPF</label><input id="cpf" name="cpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" value="{{ request.form.get('cpf', '') }}" required><small>Informe os 11 números, com ou sem pontuação.</small></fieldset>
+<fieldset><legend>02 · Sua conta</legend><div class="linha"><div><label for="agencia">Agência</label><select id="agencia" name="codigo_agencia" required>{% for agencia in agencias %}<option value="{{ agencia.codigo }}" {{ 'selected' if request.form.get('codigo_agencia') == agencia.codigo }}>{{ agencia.identificacao() }} · {{ agencia.cidade }}</option>{% endfor %}</select></div><div><label for="tipo">Tipo de conta</label><select id="tipo" name="tipo" required><option value="corrente" {{ 'selected' if request.form.get('tipo') == 'corrente' }}>Corrente · dia a dia</option><option value="poupança" {{ 'selected' if request.form.get('tipo') == 'poupança' }}>Poupança · reserva</option><option value="salário" {{ 'selected' if request.form.get('tipo') == 'salário' }}>Salário · organização</option></select></div></div><small>Nesta simulação, os três tipos permitem as mesmas operações, sem juros ou tarifas.</small></fieldset>
+<fieldset><legend>03 · Dados de acesso</legend><label for="login">Crie um login</label><input id="login" name="login" autocomplete="username" value="{{ request.form.get('login', '') }}" required><small>O login deve ser exclusivo para esta conta.</small><label for="senha">Crie uma senha</label><input id="senha" name="senha" type="password" autocomplete="new-password" required></fieldset>
+<button class="btn largura" type="submit">Abrir minha conta <span aria-hidden="true">→</span></button></form></section></div>{% endblock %}
