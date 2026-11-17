@@ -1,38 +1,15 @@
-# Lista de agências
-# Cada agência é uma tripla: (codigo, nome, cidade)
-agencias = []
+# guarda as informações da agência, nada demais
+class Agencia:
+    def __init__(self, codigo, nome, cidade):
+        self.codigo = codigo
+        self.nome = nome
+        self.cidade = cidade
 
+    # junta o código e o nome pra mostrar nas opções do site
+    def identificacao(self):
+        return self.codigo + ' · ' + self.nome
 
-# Cadastra um nova agência e verifica se o código já existe
-def criar_agencia(codigo, nome, cidade):
-    if buscar_agencia_por_codigo(codigo) is not None:
-        print("Código de agência já cadastrado!")
-        return None
-
-    nova_agencia = {'Codigo da agencia': codigo,'Nome da agencia': nome, 'Cidade': cidade}
-    agencias.append(nova_agencia)
-
-    return nova_agencia
-    
-#substitui a lista inteira de agências por outra
-def definir_agencias(lista):
-    global agencias
-    agencias.clear()
-    agencias.extend(lista)
-
-# Procura uma agência pelo código
-def buscar_agencia_por_codigo(codigo):
-    for agencia in agencias:
-        if agencia['Codigo da agencia'] == codigo:
-            return agencia
-    return None
-
-# Calcula o dinheiro total das contas pertencentes à agência
-def montante_total_agencia(codigo, contas):
-    total = 0.0
-
-    for conta in contas:
-        # confere se a conta pertence à agência e soma o saldo
-        if conta['codigo_agencia'] == codigo:
-            total = total + conta['saldo']
-    return total
+    # deixa os dados no formato que vai pro json
+    def para_dicionario(self):
+        return {'Codigo da agencia': self.codigo,
+                'Nome da agencia': self.nome, 'Cidade': self.cidade}
