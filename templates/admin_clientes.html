@@ -1,8 +1,1 @@
-{% extends "base.html" %}
-{% block conteudo %}
-<h1>Clientes</h1>
-<div class="card"><div class="scroll"><table><tr><th>Nome</th><th>CPF</th></tr>
-  {% for c in clientes %}<tr><td>{{ c['Nome'] }}</td><td>{{ c['CPF'] }}</td></tr>
-  {% else %}<tr><td colspan="2" class="mut">Nenhum cliente cadastrado.</td></tr>{% endfor %}
-</table></div></div>
-{% endblock %}
+{% extends 'base.html' %}{% block conteudo %}<div class="titulo-linha"><div><p class="sobretitulo">GERÊNCIA / CLIENTES</p><h1>Quem faz parte do banco.</h1><p>Um cadastro por CPF, mesmo quando o cliente tem mais de uma conta.</p></div><span class="badge">{{ clientes|length }} clientes</span></div><section class="card"><div class="tabela-scroll"><table><thead><tr><th>Nome completo</th><th>CPF</th></tr></thead><tbody>{% for c in clientes %}<tr><td><strong>{{ c.nome }}</strong></td><td>{{ c.cpf_formatado() }}</td></tr>{% else %}<tr><td colspan="2" class="vazio">Nenhum cliente cadastrado. Os cadastros aparecem após a abertura de conta.</td></tr>{% endfor %}</tbody></table></div></section>{% endblock %}
