@@ -1,22 +1,21 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block conteudo %}
+{% if pagina == 'ajuda' %}
+<div class="titulo-linha"><div><p class="sobretitulo">COMO FUNCIONA</p><h1>Seu banco, sem complicação.</h1><p>Um guia rápido para entender sua conta e cada operação.</p></div></div><div class="grade duas"><article class="card" id="deposito"><span class="icone">↓</span><h2>Depósito: o dinheiro entra.</h2><p>Entre em <strong>Movimentar → Depositar</strong>, informe o valor e confirme. O depósito aumenta o saldo da sua conta.</p><div class="exemplo">Saldo de R$ 50,00 + depósito de R$ 20,00 = <strong>R$ 70,00</strong></div></article><article class="card"><span class="icone">↑</span><h2>Saque: o dinheiro sai.</h2><p>Informe o valor e confirme com a senha da sua conta. Você só pode sacar até o valor do saldo disponível.</p><div class="exemplo">Saldo de R$ 70,00 − saque de R$ 10,00 = <strong>R$ 60,00</strong></div></article><article class="card" id="transferencia"><span class="icone">↗</span><h2>Transferência: entre contas.</h2><p>Informe o número de outra conta deste banco, o valor e a sua senha. O valor sai da sua conta e entra na conta de destino.</p><p>Não é possível transferir para a própria conta nem enviar um valor maior que o saldo.</p><div class="exemplo">Envio de R$ 15,00: sua conta <strong>− R$ 15,00</strong> · destino <strong>+ R$ 15,00</strong></div></article><article class="card" id="extrato"><span class="icone">≡</span><h2>Extrato: a história do saldo.</h2><p>Veja a data, o tipo, a descrição e o valor de cada operação. O filtro separa entradas e saídas.</p><p>O resumo na página inicial soma todas as movimentações desde a abertura da conta.</p></article></div><section class="card"><h2>Perguntas frequentes</h2><details><summary>Qual tipo de conta devo escolher?</summary><p>Corrente é apresentada para o dia a dia; poupança para organizar uma reserva; salário para separar seus recebimentos. Neste projeto acadêmico, as três têm as mesmas operações, sem juros, rendimentos ou tarifas.</p></details><details><summary>Como devo digitar os valores?</summary><p>Use 100,50 ou 100.50 para cem reais e cinquenta centavos. Não use separador de milhar. O valor precisa ser positivo e ter no máximo duas casas decimais.</p></details><details><summary>Posso ter mais de uma conta?</summary><p>Sim. Use o mesmo CPF e escolha um novo login para a nova conta. Cada conta tem número, saldo e extrato próprios.</p></details><details><summary>Os dados continuam salvos quando eu saio?</summary><p>Sim. Cada cadastro e movimentação concluída é salvo. Ao abrir o programa novamente, os dados são recuperados.</p></details></section>
+{% else %}
 <section class="hero">
-  <div class="watermark">荒坂</div>
-  <span class="tag">Divisão financeira</span>
-  <h1>Seu patrimônio.<br><span>Sob nosso controle.</span></h1>
-  <p>Contas salário, corrente e poupança com a segurança de uma megacorporação. Abra sua conta em segundos e movimente seu dinheiro de qualquer terminal.</p>
-  <div class="acoes">
-    {% if session.get('numero') %}
-      <a class="btn" href="{{ url_for('painel') }}">Ir para o painel</a>
-    {% else %}
-      <a class="btn" href="{{ url_for('abrir_conta') }}">Abrir conta</a>
-      <a class="btn ghost" href="{{ url_for('entrar') }}">Acessar conta</a>
-    {% endif %}
+  <div class="hero-texto"><p class="sobretitulo"><span class="ponto"></span> SEU DINHEIRO BEM ORGANIZADO</p>
+    <h1>Um banco simples.<br>Uma vida <em>mais leve.</em></h1>
+    <p class="lead">Saldo à vista, operações sem complicação e cada movimento no seu lugar.</p>
+    <div class="acoes"><a class="btn" href="{{ url_for('painel') if session.get('numero') else url_for('abrir_conta') }}">{{ 'Ir para minha conta' if session.get('numero') else 'Quero abrir minha conta' }} <span aria-hidden="true">↗</span></a><a class="link" href="{{ url_for('ajuda') }}">Entenda como funciona →</a></div>
+    <div class="hero-notas"><span>01.Abra sua conta</span><span>02.Faça depósitos</span><span>03.Acompanhe seu saldo</span></div>
+  </div>
+  <div class="hero-visual" aria-label="Exemplo ilustrativo de conta bancária">
+    <div class="orbita"></div><div class="demo-cartao"><div class="cartao-topo"><span>arasaka bank</span><span class="selo">CONTA DIGITAL</span></div><p>Uma visão clara do seu dinheiro</p><div class="demo-saldo">Tudo sob<br>seu controle.</div><div class="cartao-rodape"><span>SALDO · EXTRATO · TRANSFERÊNCIAS</span><span aria-hidden="true">↗</span></div></div>
+    <div class="demo-aviso"><span class="icone">✓</span><div><strong>Cada movimento conta.</strong><span>Seu extrato sempre organizado.</span></div></div>
   </div>
 </section>
-<div class="grid">
-  <div class="card"><h3>Depósitos</h3>Envie dinheiro para sua conta na hora.</div>
-  <div class="card"><h3>Transferências</h3>Entre contas do banco, confirmadas com sua senha.</div>
-  <div class="card"><h3>Extrato</h3>Cada movimentação registrada, com data e hora.</div>
-</div>
+<section class="secao"><div class="titulo-linha"><div><p class="sobretitulo">O ESSENCIAL BEM FEITO</p><h2>Seu banco no dia a dia.</h2></div><p>Você entende o que faz.<br></p></div>
+<div class="grade tres"><article class="card recurso"><span class="icone">↓</span><h3>Deposite e acompanhe</h3><p>Adicione um valor à sua conta.</p><a href="{{ url_for('ajuda') }}#deposito">Como depositar →</a></article><article class="card recurso"><span class="icone">↗</span><h3>Transfira</h3><p>Transfira dinheiro para outras contas de forma segura.</p><a href="{{ url_for('ajuda') }}#transferencia">Como transferir →</a></article><article class="card recurso"><span class="icone">≡</span><h3>Consulte seu extrato</h3><p>Consulte entradas, saídas, datas e descrições de cada movimentação.</p><a href="{{ url_for('ajuda') }}#extrato">Como consultar →</a></article></div></section>
+{% endif %}
 {% endblock %}
