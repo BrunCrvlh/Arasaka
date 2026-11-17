@@ -1,11 +1,1 @@
-{% extends "base.html" %}
-{% block conteudo %}
-<h1>Contas</h1>
-<div class="card"><form method="get" style="display:flex;gap:12px;align-items:end;flex-wrap:wrap">
-  <div style="flex:1;min-width:200px"><label>Filtrar por CPF (vazio = todas)</label><input name="cpf" value="{{ filtro }}"></div>
-  <button style="margin:0">Filtrar</button></form></div>
-<div class="card"><div class="scroll"><table><tr><th>Nº</th><th>CPF</th><th>Agência</th><th>Tipo</th><th>Saldo</th></tr>
-  {% for c in contas %}<tr><td>{{ c['numero'] }}</td><td>{{ c['cpf'] }}</td><td>{{ c['codigo_agencia'] }}</td><td>{{ c['tipo'] }}</td><td>{{ c['saldo']|brl }}</td></tr>
-  {% else %}<tr><td colspan="5" class="mut">Nenhuma conta encontrada.</td></tr>{% endfor %}
-</table></div></div>
-{% endblock %}
+{% extends 'base.html' %}{% block conteudo %}<div class="titulo-linha"><div><p class="sobretitulo">GERÊNCIA / CONTAS</p><h1>Contas e seus titulares.</h1><p>Consulte as contas ou encontre todas as contas de um CPF.</p></div></div><section class="card"><form class="filtro" method="get"><label for="cpf">CPF do titular</label><input id="cpf" name="cpf" value="{{ filtro }}" placeholder="Todos os clientes"><button class="btn pequeno" type="submit">Buscar</button>{% if filtro %}<a class="link" href="{{ url_for('admin_contas') }}">Limpar</a>{% endif %}</form></section><section class="card"><div class="tabela-scroll"><table><thead><tr><th>Conta</th><th>Titular / CPF</th><th>Agência</th><th>Tipo</th><th class="direita">Saldo</th></tr></thead><tbody>{% for c in contas %}<tr><td><strong>{{ c.numero }}</strong></td><td><strong>{{ c.cliente.nome }}</strong><small>{{ c.cliente.cpf_formatado() }}</small></td><td>{{ c.agencia.codigo }}</td><td><span class="badge">{{ c.tipo|capitalize }}</span></td><td class="direita valor">{{ c.consultar_saldo()|brl }}</td></tr>{% else %}<tr><td colspan="5" class="vazio">Nenhuma conta encontrada.</td></tr>{% endfor %}</tbody></table></div></section>{% endblock %}
