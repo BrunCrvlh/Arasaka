@@ -1,8 +1,1 @@
-{% extends "base.html" %}
-{% block conteudo %}
-<div class="narrow"><div class="card">
-  <span class="tag">Acesso restrito</span>
-  <h1>Terminal corporativo</h1>
-  <form method="post"><label>Código de acesso: digite -> arasaka</label><input name="senha" type="password" autofocus required><button>Autorizar</button></form>
-</div></div>
-{% endblock %}
+{% extends 'base.html' %}{% block conteudo %}<div class="layout-form"><section class="form-intro"><p class="sobretitulo">ÁREA ADMINISTRATIVA</p><h1>Uma visão completa<br>do banco.</h1><p>Acompanhe os cadastros, organize as agências e consulte o total dos saldos.</p></section><section class="card formulario"><p class="sobretitulo">GERÊNCIA</p><h2>Acesso administrativo</h2><p>Informe a senha da gerência para continuar.</p><form method="post"><label for="senha">Senha da gerência</label><input id="senha" name="senha" type="password" autocomplete="current-password" required><button class="btn largura" type="submit">Entrar na gerência →</button></form><p class="form-fim">Para acessar sua conta pessoal, <a href="{{ url_for('entrar') }}">entre por aqui</a>.</p></section></div>{% endblock %}
