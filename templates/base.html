@@ -1,51 +1,53 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block titulo %}Arasaka Bank{% endblock %}</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Arasaka Bank · Seu banco, mais simples{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<header><div class="bar">
-  <a class="brand" href="{{ url_for('index') }}"><img class="logo" src="{{ url_for('static', filename='Arasaka.png') }}" alt="Arasaka"> ARASAKA BANK</a>
-  <nav>
-  {% if session.get('numero') %}
-    <a href="{{ url_for('painel') }}">Painel</a>
-    <a href="{{ url_for('operacoes') }}">Operações</a>
-    <a href="{{ url_for('extrato') }}">Extrato</a>
-    <a class="sair" href="{{ url_for('sair') }}">Encerrar sessão</a>
-  {% elif session.get('admin') %}
-    <a href="{{ url_for('admin') }}">Central</a>
-    <a href="{{ url_for('admin_agencias') }}">Agências</a>
-    <a href="{{ url_for('admin_clientes') }}">Clientes</a>
-    <a href="{{ url_for('admin_contas') }}">Contas</a>
-    <a class="sair" href="{{ url_for('sair') }}">Sair</a>
-  {% else %}
-    <a href="{{ url_for('abrir_conta') }}">Abrir conta</a>
-    <a href="{{ url_for('entrar') }}">Acessar conta</a>
-    <a href="{{ url_for('admin_entrar') }}">Gerência</a>
-  {% endif %}
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="cabecalho"><div class="barra">
+  <a class="marca" href="{{ url_for('index') }}"><span class="simbolo" aria-hidden="true">A<span>·</span></span><span>arasaka<span class="marca-bank">bank</span></span></a>
+  <nav aria-label="Navegação principal">
+    {% if session.get('numero') %}
+      <a class="{{ 'ativo' if pagina == 'painel' }}" href="{{ url_for('painel') }}">Minha conta</a>
+      <a class="{{ 'ativo' if pagina == 'operacoes' }}" href="{{ url_for('operacoes') }}">Movimentar</a>
+      <a class="{{ 'ativo' if pagina == 'extrato' }}" href="{{ url_for('extrato') }}">Extrato</a>
+      <a class="{{ 'ativo' if pagina == 'ajuda' }}" href="{{ url_for('ajuda') }}">Ajuda</a>
+      <a class="nav-botao" href="{{ url_for('sair') }}">Sair</a>
+    {% elif session.get('admin') %}
+      <a class="{{ 'ativo' if pagina == 'admin' }}" href="{{ url_for('admin') }}">Visão geral</a>
+      <a class="{{ 'ativo' if pagina == 'agencias' }}" href="{{ url_for('admin_agencias') }}">Agências</a>
+      <a class="{{ 'ativo' if pagina == 'clientes' }}" href="{{ url_for('admin_clientes') }}">Clientes</a>
+      <a class="{{ 'ativo' if pagina == 'contas' }}" href="{{ url_for('admin_contas') }}">Contas</a>
+      <a class="nav-botao" href="{{ url_for('sair') }}">Sair</a>
+    {% else %}
+      <a class="{{ 'ativo' if pagina == 'ajuda' }}" href="{{ url_for('ajuda') }}">Como funciona</a>
+      <a class="{{ 'ativo' if pagina == 'gerencia' }}" href="{{ url_for('admin_entrar') }}">Gerência</a>
+      <a class="nav-botao" href="{{ url_for('entrar') }}">Acessar conta <span aria-hidden="true">↗</span></a>
+      <a class="btn pequeno" href="{{ url_for('abrir_conta') }}">Abra sua conta</a>
+    {% endif %}
   </nav>
 </div></header>
-<main>
-  {% with mensagens = get_flashed_messages(with_categories=true) %}
-    {% for categoria, texto in mensagens %}<div class="msg {{ categoria }}">{{ texto }}</div>{% endfor %}
-  {% endwith %}
+<main id="conteudo" tabindex="-1">
+  <div aria-live="polite">{% for categoria, texto in get_flashed_messages(with_categories=true) %}<div class="mensagem {{ categoria }}" role="status"><strong>{{ 'Tudo certo' if categoria == 'ok' else 'Confira os dados' }}</strong><span>{{ texto }}</span></div>{% endfor %}</div>
   {% block conteudo %}{% endblock %}
 </main>
-<footer>Arasaka Bank</footer>
+<footer><div><strong>arasaka bank</strong></div><p>Projeto acadêmico</p></footer>
 <script>
-document.querySelectorAll('input[type="password"]').forEach(function(campo){
+// só troca a senha entre escondida e visível quando marca a caixinha
+document.querySelectorAll('input[type="password"]').forEach(function (campo) {
   var rotulo = document.createElement('label');
   rotulo.className = 'mostrar-senha';
   var caixa = document.createElement('input');
   caixa.type = 'checkbox';
-  caixa.onchange = function(){ campo.type = caixa.checked ? 'text' : 'password'; };
+  caixa.addEventListener('change', function () {
+    campo.type = caixa.checked ? 'text' : 'password';
+  });
   rotulo.appendChild(caixa);
-  rotulo.appendChild(document.createTextNode(' mostrar senha'));
+  rotulo.appendChild(document.createTextNode('Mostrar senha'));
   campo.after(rotulo);
 });
 </script>
