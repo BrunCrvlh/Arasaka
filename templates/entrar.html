@@ -1,12 +1,8 @@
-{% extends "base.html" %}
-{% block conteudo %}
-<div class="narrow"><div class="card">
-  <h1>Acesso ao terminal</h1>
-  <form method="post">
-    <label>Login</label><input name="login" autofocus required>
-    <label>Senha</label><input name="senha" type="password" required>
-    <button>Autenticar</button>
-  </form>
-  <p class="mut">Ainda não tem conta? <a href="{{ url_for('abrir_conta') }}">Abra agora</a>.</p>
-</div></div>
-{% endblock %}
+{% extends 'base.html' %}
+{% block titulo %}Acessar minha conta · Arasaka Bank{% endblock %}
+{% block conteudo %}<div class="layout-form">
+<section class="form-intro"><p class="sobretitulo">BOM TER VOCÊ POR AQUI</p><h1>Seu banco.<br>No seu ritmo.</h1><p>Entre para consultar seu saldo, movimentar sua conta e acompanhar seu dinheiro.</p><div class="nota"><strong>Primeiro acesso?</strong><p>Use o login e a senha que você escolheu ao abrir sua conta.</p></div></section>
+<section class="card formulario"><p class="sobretitulo">ÁREA DO CLIENTE</p><h2>Acesse sua conta</h2><p>Informe seus dados para continuar.</p><form method="post">
+<label for="login">Login</label><input id="login" name="login" autocomplete="username" value="{{ request.form.get('login', '') }}" placeholder="Seu login" required>
+<label for="senha">Senha</label><input id="senha" name="senha" type="password" autocomplete="current-password" required>
+<button class="btn largura" type="submit">Entrar na conta <span aria-hidden="true">→</span></button></form><p class="form-fim">Ainda não tem conta? <a href="{{ url_for('abrir_conta') }}">Abra a sua</a>.</p></section></div>{% endblock %}
