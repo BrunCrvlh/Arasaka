@@ -1,19 +1,8 @@
-{% extends "base.html" %}
-{% block conteudo %}
-<h1>Operações</h1>
-<p class="mut">Saldo atual: <strong style="color:#fff">{{ conta['saldo']|brl }}</strong></p>
-<div class="grid">
-  <div class="card"><h3>Depositar</h3>
-    <form method="post"><input type="hidden" name="operacao" value="depositar">
-    <label>Valor (R$)</label><input name="valor" inputmode="decimal" required><button>Depositar</button></form></div>
-  <div class="card"><h3>Sacar</h3>
-    <form method="post"><input type="hidden" name="operacao" value="sacar">
-    <label>Valor (R$)</label><input name="valor" inputmode="decimal" required>
-    <label>Senha de confirmação</label><input name="senha" type="password" required><button>Sacar</button></form></div>
-  <div class="card"><h3>Transferir</h3>
-    <form method="post"><input type="hidden" name="operacao" value="transferir">
-    <label>Conta de destino</label><input name="destino" inputmode="numeric" required>
-    <label>Valor (R$)</label><input name="valor" inputmode="decimal" required>
-    <label>Senha de confirmação</label><input name="senha" type="password" required><button>Transferir</button></form></div>
-</div>
-{% endblock %}
+{% extends 'base.html' %}
+{% block conteudo %}<div class="titulo-linha"><div><p class="sobretitulo">MOVIMENTAR</p><h1>Seu dinheiro em movimento.</h1><p>Escolha a operação e confira os dados antes de confirmar.</p></div><div class="saldo-mini"><small>Saldo disponível</small><strong>{{ conta.consultar_saldo()|brl }}</strong></div></div>
+{% set acao = request.args.get('acao', 'depositar') %}
+<div class="grade tres operacoes">
+<section id="depositar" class="card operacao {{ 'destaque' if acao == 'depositar' }}"><span class="icone">↓</span><h2>Depositar</h2><p>O valor informado será adicionado ao saldo desta conta.</p><form method="post"><input type="hidden" name="operacao" value="depositar"><label for="valor-deposito">Valor do depósito</label><div class="input-dinheiro"><span>R$</span><input id="valor-deposito" name="valor" inputmode="decimal" placeholder="0,00" aria-describedby="dica-deposito" required></div><small id="dica-deposito">Ex.: 100,50. Não use separador de milhar.</small><div class="operacao-nota">Destino: sua conta {{ conta.numero }}.</div><button class="btn largura" type="submit">Confirmar depósito</button></form></section>
+<section id="transferir" class="card operacao {{ 'destaque' if acao == 'transferir' }}"><span class="icone">↗</span><h2>Transferir</h2><p>Envie para outra conta cadastrada no Arasaka Bank.</p><form method="post"><input type="hidden" name="operacao" value="transferir"><label for="destino">Número da conta de destino</label><input id="destino" name="destino" inputmode="numeric" pattern="[0-9]+" placeholder="Ex.: 2" required><label for="valor-transferencia">Valor da transferência</label><div class="input-dinheiro"><span>R$</span><input id="valor-transferencia" name="valor" inputmode="decimal" placeholder="0,00" required></div><label for="senha-transferencia">Sua senha de confirmação</label><input id="senha-transferencia" name="senha" type="password" autocomplete="current-password" required><button class="btn largura" type="submit">Confirmar transferência</button></form></section>
+<section id="sacar" class="card operacao {{ 'destaque' if acao == 'sacar' }}"><span class="icone">↑</span><h2>Sacar</h2><p>Retire um valor de até o limite do seu saldo disponível.</p><form method="post"><input type="hidden" name="operacao" value="sacar"><label for="valor-saque">Valor do saque</label><div class="input-dinheiro"><span>R$</span><input id="valor-saque" name="valor" inputmode="decimal" placeholder="0,00" required></div><label for="senha-saque">Sua senha de confirmação</label><input id="senha-saque" name="senha" type="password" autocomplete="current-password" required><button class="btn largura" type="submit">Confirmar saque</button></form></section>
+</div><div class="nota horizontal"><strong>Precisa de uma orientação?</strong><p>Veja exemplos e entenda como cada operação altera seu saldo.</p><a href="{{ url_for('ajuda') }}">Consultar ajuda →</a></div>{% endblock %}
