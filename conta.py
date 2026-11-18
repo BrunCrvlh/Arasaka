@@ -1,8 +1,9 @@
 from datetime import datetime
 from cliente import Cliente, limpar_cpf, cpf_valido
 from agencia import Agencia
+from abc import ABC, abstractmethod
 
-# mexi em coisa pra caralho aqui
+# mexi em coisa pra carai aqui
 # essas funções ajeitam o valor que vem do formulário e como ele aparece no site
 def ler_valor(texto):
     # transforma 10,50 em 1050 centavos, pra não dar aquelas diferenças de float
@@ -63,8 +64,8 @@ class Movimentacao:
                 'saldo_apos': self.saldo_apos}
 
 
-# essa é a base dos três tipos de conta, com as operações que eles têm em comum
-class Conta:
+# essa é a base dos dois tipos de conta, com as operações que eles têm em comum e conta herda ABC por ser uma classe abstrata.
+class Conta(ABC):
     def __init__(self, numero, cliente, agencia, login, senha):
         self.numero = numero
         # aqui ficam o cliente e a agência da conta, os dois já são objetos
@@ -90,8 +91,7 @@ class Conta:
 
     # monta a movimentação e coloca no extrato com o saldo daquele momento
     def registrar(self, tipo, valor, descricao):
-        movimento = Movimentacao(tipo, valor, descricao,
-                                 saldo_apos=self.__saldo)
+        movimento = Movimentacao(tipo, valor, descricao, saldo_apos = self.__saldo)
         self.__extrato.append(movimento)
 
     # se o valor for válido, soma no saldo e guarda no extrato
@@ -109,22 +109,7 @@ class Conta:
         self.__saldo -= valor
         self.registrar('Saque', -valor, 'Saque na conta')
         return True
-
-    # não deixa mandar pra própria conta nem mandar mais do que tem
-    def transferir(self, destino, valor):
-        if not isinstance(destino, Conta) or destino is self:
-            return False
-        if not valor_valido(valor) or valor > self.__saldo:
-            return False
-        # passou nas verificações, aí tira de uma conta e coloca na outra
-        self.__saldo -= valor
-        destino.__saldo += valor
-        self.registrar('Transferência', -valor,
-                       'Para ' + destino.cliente.nome + ' · Conta ' + str(destino.numero))
-        destino.registrar('Transferência', valor,
-                         'De ' + self.cliente.nome + ' · Conta ' + str(self.numero))
-        return True
-
+    
     # percorre o extrato somando separado o que entrou e o que saiu
     def totais_movimentados(self):
         entradas = 0
@@ -135,7 +120,8 @@ class Conta:
             else:
                 saidas -= movimento.valor
         return entradas, saidas
-
+    
+    @abstractmethod
     def descricao_tipo(self):
         return 'Conta para organizar seu dinheiro.'
 
@@ -155,7 +141,7 @@ class Conta:
                 'extrato': movimentos}
 
 
-# os três tipos herdam de Conta e cada um muda a própria descrição
+# os dois tipos herdam de Conta e cada um muda a própria descrição
 # isso é o polimorfismo daqui: chama descricao_tipo igual, mas o texto depende do objeto
 class ContaCorrente(Conta):
     def __init__(self, numero, cliente, agencia, login, senha):
@@ -166,23 +152,24 @@ class ContaCorrente(Conta):
     def descricao_tipo(self):
         return 'Sua conta para depósitos, saques e transferências do dia a dia.'
 
-
+    # não deixa mandar pra própria conta nem mandar mais do que tem.
+    def transferir(self, destino, valor):
+            if not isinstance(destino, Conta) or destino is self:
+                return False
+            if not valor_valido(valor) or valor > self.consultar_saldo():
+                return False
+            # passou nas verificações, aí tira de uma conta e coloca na outra
+            self.sacar(valor)
+            destino.depositar(valor)
+            return True
+    
 class ContaPoupanca(Conta):
     def __init__(self, numero, cliente, agencia, login, senha):
         super().__init__(numero, cliente, agencia, login, senha)
-        self.tipo = 'poupança'
+        self.tipo = 'poupanca'
 
     def descricao_tipo(self):
         return 'Separe uma reserva. Nesta simulação, não há rendimento automático.'
-
-
-class ContaSalario(Conta):
-    def __init__(self, numero, cliente, agencia, login, senha):
-        super().__init__(numero, cliente, agencia, login, senha)
-        self.tipo = 'salário'
-
-    def descricao_tipo(self):
-        return 'Organize seu salário. Nesta simulação, todas as operações estão disponíveis.'
 
 
 # o banco junta os clientes, agências e contas pra não ficar tudo solto no app
@@ -264,17 +251,15 @@ class Banco:
             return None, 'Preencha o login e a senha.'
         if self.buscar_login(login) is not None:
             return None, 'Este login já está em uso. Escolha outro.'
-        if tipo not in ['corrente', 'poupança', 'salário']:
+        if tipo not in ['corrente', 'poupanca']:
             return None, 'Escolha um tipo de conta válido.'
         cliente = self.buscar_cliente(cpf)
         if cliente is None:
             cliente = self.cadastrar_cliente(nome, cpf)
         if tipo == 'corrente':
             conta = ContaCorrente(self.__proximo_numero, cliente, agencia, login, senha)
-        elif tipo == 'poupança':
-            conta = ContaPoupanca(self.__proximo_numero, cliente, agencia, login, senha)
         else:
-            conta = ContaSalario(self.__proximo_numero, cliente, agencia, login, senha)
+            conta = ContaPoupanca(self.__proximo_numero, cliente, agencia, login, senha)
         self.__contas.append(conta)
         self.__proximo_numero += 1
         return conta, 'Conta aberta com sucesso.'
@@ -289,6 +274,8 @@ class Banco:
         origem = self.buscar_conta(numero_origem)
         destino = self.buscar_conta(numero_destino)
         if origem is None or destino is None:
+            return False
+        if not isinstance(origem, ContaCorrente):
             return False
         return origem.transferir(destino, valor)
 
