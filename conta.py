@@ -3,6 +3,8 @@ from cliente import Cliente, limpar_cpf, cpf_valido
 from agencia import Agencia
 from abc import ABC, abstractmethod
 
+#mexi na UFS, to tentando no freestyle, talvez de merda
+
 # mexi em coisa pra carai aqui
 # essas funções ajeitam o valor que vem do formulário e como ele aparece no site
 def ler_valor(texto):
@@ -67,7 +69,8 @@ class Movimentacao:
 # essa é a base dos dois tipos de conta, com as operações que eles têm em comum e conta herda ABC por ser uma classe abstrata.
 class Conta(ABC):
     def __init__(self, numero, cliente, agencia, login, senha):
-        self.numero = numero
+        agencia,login = '', senha=''):
+        self.numero = str(numero)
         # aqui ficam o cliente e a agência da conta, os dois já são objetos
         self.cliente = cliente
         self.agencia = agencia
@@ -80,7 +83,14 @@ class Conta(ABC):
 
     # compara com a senha dessa conta
     def autenticar(self, senha):
-        return self.__senha == senha
+        return self.login != '' and
+    self.__senha == senha
+
+    def getSaldo(self):
+        return self.consultar_saldo()
+
+    def restaurar_saldo(self, saldo):
+        self.__saldo = saldo
 
     def consultar_saldo(self):
         return self.__saldo
@@ -135,10 +145,21 @@ class Conta(ABC):
         movimentos = []
         for movimento in self.__extrato:
             movimentos.append(movimento.para_dicionario())
-        return {'numero': self.numero, 'cpf': self.cliente.cpf,
-                'codigo_agencia': self.agencia.codigo, 'login': self.login,
-                'senha': self.__senha, 'tipo': self.tipo, 'saldo': self.__saldo,
-                'extrato': movimentos}
+            
+        dados = {'numero': self.numero, 'cpf': self.cliente.cpf, 'codigo_agencia': self.agencia.codigo, 'login':self.login, 'senha':self.__senha, 'tipo':self.tipo, 'saldo': self.__saldo. 'extrato':movimentos}
+        
+        if isinstance(self, ContaPoupanca):
+            dados['taxaRendimento'] =
+            self.taxaRendimento
+        if isinstance(self,ContaCorrente):
+            dados['limiteChequeEspecial'] =
+        self.limiteChequeEspecial
+            dados['tarifaMensal'] = 
+        self.tarifaMensal
+            dados['chavesPix'] = 
+        self.chavesPix.copy()
+            
+        return dados
 
 
 # os dois tipos herdam de Conta e cada um muda a própria descrição
@@ -164,10 +185,30 @@ class ContaCorrente(Conta):
             return True
     
 class ContaPoupanca(Conta):
-    def __init__(self, numero, cliente, agencia, login, senha):
+    def __init__(self, numero, cliente, agencia, login='', senha='', taxaRendimento=0,005):
         super().__init__(numero, cliente, agencia, login, senha)
         self.tipo = 'poupanca'
+        self.taxaRendimento = float(taxaRendimento)
 
+    def descricao_tipo(self):
+        return 'Poupança com rendimento mensal e histórico de movimentações.'
+
+    def aplicar_rendimento(self, data_referencia=None):
+        if data_referencia is None:
+            data_referencia = datatime.now().strftime('%Y-%m')
+        else:
+            data_referencia = str(data_referencia)[:7]
+        for movimento in self.consultar_extrato():
+            if (movimento.tipo.upper() == 'RENDIMENTO' and str(movimento.data)[:7]  == data_referencia):
+                return 0
+        saldo = self.consultar_saldo()
+        if saldo <= 0 or self.taxaRendimento <= 0:
+            return 0
+        rendimento = int(saldo + self.taxaRendimento + 0.5)
+        if rendimento
+            
+
+    
     def descricao_tipo(self):
         return 'Separe uma reserva. Nesta simulação, não há rendimento automático.'
 
